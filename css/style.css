@@ -321,17 +321,42 @@ p { margin-bottom: 1rem; }
 .form-group textarea { resize: vertical; min-height: 100px; }
 
 /* Dark form (on navy bg) */
-.form-dark input,
-.form-dark textarea {
-  background: rgba(255,255,255,0.08);
-  border-color: var(--border-light);
+.form-dark label {
   color: var(--cream);
+  opacity: 0.9;
+}
+.form-dark label span {
+  opacity: 0.5;
+}
+.form-dark input,
+.form-dark textarea,
+.form-dark select {
+  background: rgba(242,235,217,0.1);
+  border: 1.5px solid rgba(242,235,217,0.25);
+  color: var(--cream);
+}
+.form-dark input:focus,
+.form-dark textarea:focus,
+.form-dark select:focus {
+  border-color: var(--slate-light);
+  background: rgba(242,235,217,0.14);
 }
 .form-dark input::placeholder,
 .form-dark textarea::placeholder {
-  color: rgba(242,235,217,0.35);
+  color: rgba(242,235,217,0.4);
 }
-.form-dark label { color: var(--text-muted-on-navy); }
+.form-dark .form-check label {
+  color: var(--text-muted-on-navy);
+  opacity: 1;
+}
+.form-dark .form-check input[type="checkbox"] {
+  border-color: rgba(242,235,217,0.3);
+  background: rgba(242,235,217,0.08);
+}
+.form-dark .form-check input[type="checkbox"]:checked {
+  background: var(--slate);
+  border-color: var(--slate);
+}
 
 .form-check {
   display: flex;
@@ -438,11 +463,23 @@ p { margin-bottom: 1rem; }
   object-position: center top;
 }
 
-/* --- Pricing --- */
+/* --- Pricing (always horizontal) --- */
 .pricing-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+@media (max-width: 768px) {
+  .pricing-grid {
+    grid-template-columns: repeat(3, minmax(240px, 1fr));
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 8px;
+  }
+  .pricing-card {
+    scroll-snap-align: start;
+  }
 }
 .pricing-card {
   background: var(--white);
@@ -530,7 +567,6 @@ p { margin-bottom: 1rem; }
   .hero-cta-row { flex-direction: row; align-items: center; gap: 16px; }
   .trust-bar { flex-direction: row; flex-wrap: wrap; gap: 24px; }
   .card-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
-  .pricing-grid { grid-template-columns: 1fr 1fr; }
   .two-col { grid-template-columns: 1fr 1fr; gap: 48px; }
   .footer-grid { grid-template-columns: 2fr 1fr 1fr; gap: 40px; }
   .footer-bottom { flex-direction: row; justify-content: space-between; }
@@ -574,9 +610,20 @@ p { margin-bottom: 1rem; }
 
   .trust-bar { gap: 40px; }
   .card-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .pricing-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; }
   .two-col { gap: 64px; }
   .card { padding: 32px 28px; }
   .headshot-inline { width: 260px; height: 260px; }
   .section-header { margin-bottom: 48px; }
+}
+
+/* Utility: two-column card layout that stays 2-col and centered */
+.two-col-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+@media (min-width: 600px) {
+  .two-col-cards { grid-template-columns: 1fr 1fr; }
 }
