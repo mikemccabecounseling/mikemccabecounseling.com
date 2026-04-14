@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mikemccabecounseling.com/sitemap.xml
+
+# Block thank-you pages from indexing
+Disallow: /thank-you/
